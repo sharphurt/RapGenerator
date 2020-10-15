@@ -1,7 +1,7 @@
 import re
 from random import choice, randint
 
-garbage_words = ['verse', 'chorus', 'intro', 'hook', 'outro']
+garbage_words = ['verse', 'chorus', 'intro', 'hook', 'bridge', 'outro', 'eminem', 'rihanna']
 
 
 def create_garbage_words_regex(excluded_words):
@@ -21,47 +21,69 @@ def create_bigrams_dictionary(words):
     for word_id in range(0, len(words) - 1):
         word = words[word_id]
         if word not in bigrams.keys():
-            bigrams[word] = set()
-        bigrams[word].add(words[word_id + 1])
+            bigrams[word] = []
+        bigrams[word].append(words[word_id + 1])
     return bigrams
 
 
 def generate_text_from_bigrams(bigrams, line_length=5, lines_count=10):
     lines = []
+    words_to_capitalize = ["i'm", "i've", "i'd", "i'll", "i`m", "i`ve", "i`d", "i`ll"]
     for line in range(0, lines_count):
-        line = [choice(list(bigrams.keys()))]
-        for word in range(1, line_length):
-            line.append(choice(list(bigrams[line[word - 1]])))
-        lines.append(' '.join(line).capitalize())
+        line = [choice(list(bigrams.keys())).capitalize()]
+        for word_index in range(1, line_length):
+            next_word = choice(bigrams[line[word_index - 1].lower()])
+            if next_word in words_to_capitalize:
+                next_word = next_word.capitalize()
+            line.append(next_word)
+        lines.append(' '.join(line))
     return lines
 
 
 def set_commas(lines):
     result = []
     for line in lines:
-        punct_symbols_count = randint(1, line.count(' ') // 2)
-        for i in range(punct_symbols_count):
+        whitespaces_count = randint(0, line.count(' ')) // 2
+        for i in range(whitespaces_count):
             whitespaces = list(filter(lambda p: p[1] == ' ', list(enumerate(line))))
             index = choice(whitespaces)[0]
-            line = line[:index] + ',' + line[index:]
-        result.append(re.sub(',+', ',', line))
+            if line[index - 1] == ',':
+                continue
+            line = insert_by_index(line, index, ', ')
+        result.append(line)
+    return result
+
+
+def set_endline_punctuation(lines):
+    result = lines.copy()
+    marks = ['!', '?', ':', ';']
+    passed_line_indexes = []
+    for i in range(0, len(result)):
+        index, line = choice(list(enumerate(result)))
+        if index in passed_line_indexes:
+            continue
+        mark = choice(marks)
+        result[index] = line + mark
+        passed_line_indexes.append(index)
     return result
 
 
 def generate_rap(*base, line_length=10, lines_count=20):
     bigrams = {}
     for text in base:
-        bigrams.update(create_bigrams_dictionary(parse_text(text.read())))
-    return '\n'.join(set_commas(generate_text_from_bigrams(bigrams, line_length, lines_count)))
+        bigrams.update(create_bigrams_dictionary(parse_text(text)))
+    rap_lines = generate_text_from_bigrams(bigrams, line_length, lines_count)
+    return '\n'.join(set_endline_punctuation(set_commas(rap_lines)))
 
 
-rap_god_text = open('rap_god.txt', 'r', encoding='utf-8')
-lose_yourself_text = open('lose_yourself.txt', 'r', encoding='utf-8')
-godzilla_text = open('godzilla.txt', 'r', encoding='utf-8')
+def insert_by_index(string, index, insert):
+    str_list = list(string)
+    str_list[index] = insert
+    return ''.join(str_list)
 
-rap = generate_rap(rap_god_text, lose_yourself_text, godzilla_text)
+
+eminem_lyrics = open('lyrics.txt', 'r', encoding='utf-8')
+
+rap = generate_rap(eminem_lyrics.read())
 print(rap)
-
-rap_god_text.close()
-lose_yourself_text.close()
-godzilla_text.close()
+eminem_lyrics.close()
