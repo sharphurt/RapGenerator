@@ -1,5 +1,5 @@
 import re
-from random import choice, randint
+from random import choice
 
 garbage_words = ['verse', 'chorus', 'intro', 'hook', 'bridge', 'outro', 'proof', '[', ']']
 
@@ -64,12 +64,6 @@ def generate_rap(*base, line_length=10, lines_count=20):
         bigrams.update(create_bigrams_dictionary(parse_text(text)))
     rap_lines = generate_text_from_bigrams(bigrams, line_length, lines_count)
     return '\n'.join(set_punctuation(rap_lines))
-
-
-def insert_by_index(string, index, insert):
-    str_list = list(string)
-    str_list[index] = insert
-    return ''.join(str_list)
 
 
 eminem_lyrics = open('lyrics.txt', 'r', encoding='utf-8')
