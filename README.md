@@ -5,21 +5,20 @@
 
 ## Примеры сгенерированных текстов:
 ```
-Dump all, and, make bands and what you get it
-Earth, like paraplegic and what i'm monster blood, on me
-Myself, but they're gonna get is fifth of vodka when
-Goes around just appalled, at so they call, me what
-Blockbusters godzilla, fire monster yeah i'm still the mythological quick
-Nice at, so all, and flier got trailer full i'm
-Hotter he won't even pretending, to, be on, fire, monster
-Crowd, goes around comes around the midst of money, and
-Living and, dick and harry, caray 'cause, make anybody who
+Third's, for you want 'em that slut answer, that, I'll
+Concert I'll come here we was an, abortion dog shit;
+Nook and watch, what thought, never, look you ever since!
+Elite defense got my chest, sometimes it's not long as;
+Birdie's neck, and spins tired of sellout crowd startin’ to
+Hen', with, can come sip on girl who's got to;
 ```
 
 ```
-Lick the motherfuckin' finger finger, finger finger, prostate exam 'xam
-Perspire, like liar's pants i'm, blowin' up and got half
-Hand, 'cause e'ry tom, and be dead the receiving end
-Head zombie apocalypse and, on chainsaw 'cause make anybody, who
-Gorilla you're monster you, wanna give me, what goes around
+Vinegar in trance I'm sorry I'm sick world without me
+Heads human shield mister not cause what the streets scrambling;
+Mud must of, us don't, jerk slapped in my, game!
+Addictive as we do every white or do you the!
+Pole, and all, sue, hi, there was always call me:
+Tylenol pm tired, of nagging bosses bitching, while you, gotta
+Crashed my people just like sufiric acid crack corn rows
 ```
