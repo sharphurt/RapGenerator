@@ -62,8 +62,8 @@ def set_endline_marks(lines):
     return result
 
 
-def set_punctuation(lines):
-    return set_endline_marks(lines)
+def normalize_grammar(lines):
+    return set_endline_marks(apply_capitalize(lines))
 
 
 def generate_rap(*base, line_length=10, lines_count=20):
@@ -71,7 +71,7 @@ def generate_rap(*base, line_length=10, lines_count=20):
     for text in base:
         bigrams.update(create_bigrams_dictionary(parse_text(text)))
     rap_lines = generate_text_from_bigrams(bigrams, line_length, lines_count)
-    return '\n'.join(set_punctuation(apply_capitalize(rap_lines)))
+    return '\n'.join(normalize_grammar(rap_lines))
 
 
 eminem_lyrics = open('lyrics.txt', 'r', encoding='utf-8')
