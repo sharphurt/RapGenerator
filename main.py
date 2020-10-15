@@ -1,7 +1,7 @@
 from re import sub
 from random import choice
 
-garbage_words = ['verse', 'chorus', 'intro', 'hook', 'bridge', 'outro', 'proof', '[', ']']
+garbage_words = ['verse', 'chorus', 'intro', 'hook', 'bridge', 'outro', 'proof']
 
 
 def create_garbage_words_regex(excluded_words):
@@ -75,7 +75,6 @@ def generate_rap(*base, line_length=10, lines_count=20):
 
 
 eminem_lyrics = open('lyrics.txt', 'r', encoding='utf-8')
-
 rap = generate_rap(eminem_lyrics.read())
 print(rap)
 eminem_lyrics.close()
