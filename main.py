@@ -1,7 +1,7 @@
 import re
 from random import choice, randint
 
-garbage_words = ['verse', 'chorus', 'intro', 'hook', 'bridge', 'outro', 'eminem', 'rihanna']
+garbage_words = ['verse', 'chorus', 'intro', 'hook', 'bridge', 'outro', 'proof', '[', ']']
 
 
 def create_garbage_words_regex(excluded_words):
@@ -10,7 +10,7 @@ def create_garbage_words_regex(excluded_words):
 
 def parse_text(text):
     garbage_words_regex = create_garbage_words_regex(garbage_words)
-    text_without_punctuation = re.sub(r"(?![\w'’]+).", ' ', text.lower())
+    text_without_punctuation = re.sub(r"(?![\w'’,]+).", ' ', text.lower())
     text_without_garbage = re.sub(garbage_words_regex, '', text_without_punctuation)
     words_list = re.sub(r'\s+', ' ', text_without_garbage).split(' ')
     return list(filter(lambda w: len(w) > 1, words_list))
@@ -40,21 +40,7 @@ def generate_text_from_bigrams(bigrams, line_length=5, lines_count=10):
     return lines
 
 
-def set_commas(lines):
-    result = []
-    for line in lines:
-        whitespaces_count = randint(0, line.count(' ')) // 2
-        for i in range(whitespaces_count):
-            whitespaces = list(filter(lambda p: p[1] == ' ', list(enumerate(line))))
-            index = choice(whitespaces)[0]
-            if line[index - 1] == ',':
-                continue
-            line = insert_by_index(line, index, ', ')
-        result.append(line)
-    return result
-
-
-def set_endline_punctuation(lines):
+def set_endline_marks(lines):
     result = lines.copy()
     marks = ['!', '?', ':', ';']
     passed_line_indexes = []
@@ -68,12 +54,16 @@ def set_endline_punctuation(lines):
     return result
 
 
+def set_punctuation(lines):
+    return set_endline_marks(lines)
+
+
 def generate_rap(*base, line_length=10, lines_count=20):
     bigrams = {}
     for text in base:
         bigrams.update(create_bigrams_dictionary(parse_text(text)))
     rap_lines = generate_text_from_bigrams(bigrams, line_length, lines_count)
-    return '\n'.join(set_endline_punctuation(set_commas(rap_lines)))
+    return '\n'.join(set_punctuation(rap_lines))
 
 
 def insert_by_index(string, index, insert):
