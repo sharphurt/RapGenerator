@@ -52,7 +52,7 @@ def set_endline_marks(lines):
     result = lines.copy()
     marks = ['!', '?', ':', ';']
     passed_line_indexes = []
-    for i in range(0, len(result)):
+    for i in range(0, len(result) // 3):
         index, line = choice(list(enumerate(result)))
         if index in passed_line_indexes:
             continue
